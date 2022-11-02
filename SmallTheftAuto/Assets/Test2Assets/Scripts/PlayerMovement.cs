@@ -29,10 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Look()
     {
-        Vector3 mousePos = cam.ScreenToWorldPoint (Input.mousePosition);
-        Quaternion target =
-            Quaternion.LookRotation(new Vector3(mousePos.x, transform.position.y, mousePos.z) - transform.position, Vector3.up);
-        
+        Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Quaternion target = Quaternion.LookRotation(new Vector3(mousePos.x, transform.position.y, mousePos.z) - transform.position, Vector3.up);
         rb.rotation = Quaternion.Slerp(rb.rotation, target, rotationSmoothness);
     }
 }
