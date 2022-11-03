@@ -204,6 +204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterCarRange: 2
+  cam: {fileID: 580987359}
+  inCar: 0
 --- !u!1 &132396639
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +323,7 @@ MonoBehaviour:
   moveSpeed: 9
   handeling: 100
   body: {fileID: 592439784}
+  driver: {fileID: 0}
   moveSpeedLowerRange: 30
   moveSpeedUpperRange: 8
   handelingLowerRange: 40
@@ -346,6 +349,7 @@ MonoBehaviour:
   moveSpeed: 9
   handeling: 100
   body: {fileID: 1638625804}
+  driver: {fileID: 0}
   moveSpeedLowerRange: 30
   moveSpeedUpperRange: 8
   handelingLowerRange: 40
@@ -650,10 +654,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

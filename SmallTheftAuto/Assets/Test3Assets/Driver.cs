@@ -5,9 +5,11 @@ using UnityEngine;
 public class Driver : MonoBehaviour
 {
     public float enterCarRange = 2;
+    public CameraMovement cam;
+
     private Vehicle vehicle;
 
-    bool inCar;
+    public bool inCar;
     private void Update()
     {
         EnterExitCar();
@@ -20,10 +22,6 @@ public class Driver : MonoBehaviour
             if (IsWithinCarDistance)
             {
                 EnterCar();
-            }
-            if (inCar)
-            {
-
             }
         }
     }
@@ -64,5 +62,8 @@ public class Driver : MonoBehaviour
         transform.SetParent(GetClosestCar());
         gameObject.SetActive(false);
         vehicle.driving = true;
+        inCar = true;
+        vehicle.driver = gameObject;
+        cam.offset = new Vector3(cam.offset.x,Mathf.Lerp(10, 18, 20), cam.offset.z);
     }
 }

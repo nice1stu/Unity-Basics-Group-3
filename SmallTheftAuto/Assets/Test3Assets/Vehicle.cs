@@ -10,6 +10,7 @@ public class Vehicle : MonoBehaviour
     private float handeling;
 
     public Renderer body;
+    public GameObject driver;
 
     public float moveSpeedLowerRange;
     public float moveSpeedUpperRange;
@@ -39,7 +40,14 @@ public class Vehicle : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(0, 0, verticalInput * moveSpeed * Time.deltaTime);
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            driver.SetActive(true);
+            driving = false;
+            driver.GetComponent<Driver>().inCar = true;
+            CameraMovement cam = driver.GetComponent<Driver>().cam;
+            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), cam.offset.z);
+        }
     }
     void Update()
     {
