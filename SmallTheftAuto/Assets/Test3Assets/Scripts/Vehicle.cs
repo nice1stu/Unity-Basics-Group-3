@@ -10,7 +10,7 @@ public class Vehicle : MonoBehaviour
     private float _currentMoveSpeed;
     private float CurrentMoveSpeed 
     {
-        set { _currentMoveSpeed = Mathf.Clamp(value, 0, moveSpeed); }
+        set { _currentMoveSpeed = Mathf.Clamp(value, -moveSpeed/2, moveSpeed); }
         get { return _currentMoveSpeed;  }
     }
     [SerializeField]
@@ -22,12 +22,12 @@ public class Vehicle : MonoBehaviour
     public GameObject driver;
 
 
-    public float moveSpeedLowerRange;
-    public float moveSpeedUpperRange;
-    public float handelingLowerRange;
-    public float handelingUpperRange;
-    public float accelerationLowerRange;
-    public float accelerationUpperRange;
+    public float moveSpeedMin;
+    public float moveSpeedMax;
+    public float handelingMin;
+    public float handelingMax;
+    public float accelerationMin;
+    public float accelerationMax;
 
     private float verticalInput;
     private float horizontalInput;
@@ -36,19 +36,20 @@ public class Vehicle : MonoBehaviour
     private void Start()
     {
         body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), 0.7f, .8f);
-        moveSpeed = Random.Range(moveSpeedLowerRange, moveSpeedUpperRange);
-        handeling = Random.Range(handelingLowerRange, handelingUpperRange);
-        acceleration = Random.Range(accelerationLowerRange, accelerationUpperRange);
+        moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
+        handeling = Random.Range(handelingMin, handelingMax);
+        acceleration = Random.Range(accelerationMin, accelerationMax);
     }
     void drive()
     {
+
         if (horizontalInput > .1f)
         {
-            transform.Rotate(0f, handeling * Time.deltaTime, 0f);
+            transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
         }
         if (horizontalInput < -.1f)
         {
-            transform.Rotate(0f, -handeling * Time.deltaTime, 0f);
+            transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
         }
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
@@ -56,13 +57,22 @@ public class Vehicle : MonoBehaviour
         {
             CurrentMoveSpeed = CurrentMoveSpeed + Time.deltaTime * acceleration;
         }
+        else if (verticalInput < -.1f)
+        {
+            CurrentMoveSpeed = CurrentMoveSpeed - Time.deltaTime * acceleration;
+        }
         else
         {
             if (CurrentMoveSpeed > 0)
             {
                 CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration));
             }
+            else
+            {
+                CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration));
+            }
         }
+
         transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Escape))
         {

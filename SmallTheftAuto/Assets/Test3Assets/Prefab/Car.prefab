@@ -83,12 +83,12 @@ MonoBehaviour:
   acceleration: 14
   body: {fileID: 8768188416732218447}
   driver: {fileID: 0}
-  moveSpeedLowerRange: 30
-  moveSpeedUpperRange: 8
-  handelingLowerRange: 40
-  handelingUpperRange: 120
-  accelerationLowerRange: 6
-  accelerationUpperRange: 30
+  moveSpeedMin: 8
+  moveSpeedMax: 30
+  handelingMin: 60
+  handelingMax: 140
+  accelerationMin: 8
+  accelerationMax: 30
   driving: 0
 --- !u!1 &8768188417713625405
 GameObject:
