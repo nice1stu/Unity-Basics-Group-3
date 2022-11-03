@@ -7,15 +7,27 @@ public class Vehicle : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
+    private float _currentMoveSpeed;
+    private float CurrentMoveSpeed 
+    {
+        set { _currentMoveSpeed = Mathf.Clamp(value, 0, moveSpeed); }
+        get { return _currentMoveSpeed;  }
+    }
+    [SerializeField]
     private float handeling;
+    [SerializeField]
+    private float acceleration;
 
     public Renderer body;
     public GameObject driver;
+
 
     public float moveSpeedLowerRange;
     public float moveSpeedUpperRange;
     public float handelingLowerRange;
     public float handelingUpperRange;
+    public float accelerationLowerRange;
+    public float accelerationUpperRange;
 
     private float verticalInput;
     private float horizontalInput;
@@ -39,7 +51,18 @@ public class Vehicle : MonoBehaviour
         }
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(0, 0, verticalInput * moveSpeed * Time.deltaTime);
+        if (verticalInput > .1f)
+        {
+            CurrentMoveSpeed = CurrentMoveSpeed + Time.deltaTime * acceleration;
+        }
+        else
+        {
+            if (CurrentMoveSpeed > 0)
+            {
+                CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration));
+            }
+        }
+        transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             driver.SetActive(true);
