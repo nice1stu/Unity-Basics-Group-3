@@ -36,10 +36,11 @@ public class Vehicle : MonoBehaviour
     public bool driving;
     private void Start()
     {
-        body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), 0.7f, .8f);
+        body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
         handeling = Random.Range(handelingMin, handelingMax);
         acceleration = Random.Range(accelerationMin, accelerationMax);
+        //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     void drive()
     {
@@ -83,7 +84,7 @@ public class Vehicle : MonoBehaviour
             driver.SetActive(true);
             driving = false;
             driver.GetComponent<Driver>().inCar = true;
-            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), cam.offset.z);
+            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
             //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-14, 0, 20));
             //cam.transform.eulerAngles = new Vector3(Mathf.Lerp(45, 90, 20), cam.transform.rotation.y, cam.transform.rotation.z);
         }
