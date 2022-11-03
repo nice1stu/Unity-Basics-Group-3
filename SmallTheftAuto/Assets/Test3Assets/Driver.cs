@@ -7,7 +7,7 @@ public class Driver : MonoBehaviour
     public float enterCarRange = 2;
     private Vehicle vehicle;
 
-
+    bool inCar;
     private void Update()
     {
         EnterExitCar();
@@ -20,6 +20,10 @@ public class Driver : MonoBehaviour
             if (IsWithinCarDistance)
             {
                 EnterCar();
+            }
+            if (inCar)
+            {
+
             }
         }
     }
