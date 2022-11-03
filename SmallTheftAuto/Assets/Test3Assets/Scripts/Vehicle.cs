@@ -38,6 +38,7 @@ public class Vehicle : MonoBehaviour
         body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), 0.7f, .8f);
         moveSpeed = Random.Range(moveSpeedLowerRange, moveSpeedUpperRange);
         handeling = Random.Range(handelingLowerRange, handelingUpperRange);
+        acceleration = Random.Range(accelerationLowerRange, accelerationUpperRange);
     }
     void drive()
     {
