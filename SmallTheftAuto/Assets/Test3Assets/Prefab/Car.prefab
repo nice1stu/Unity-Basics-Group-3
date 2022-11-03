@@ -82,6 +82,7 @@ MonoBehaviour:
   moveSpeed: 9
   _currentMoveSpeed: 0
   handeling: 100
+  drifting: 0
   acceleration: 14
   body: {fileID: 8768188416732218447}
   rb: {fileID: 2794259687632498843}
@@ -91,9 +92,12 @@ MonoBehaviour:
   moveSpeedMax: 45
   handelingMin: 80
   handelingMax: 200
+  driftingMin: 1
+  driftingMax: 2
   accelerationMin: 4
   accelerationMax: 30
   driving: 0
+  braking: 0
 --- !u!54 &2794259687632498843
 Rigidbody:
   m_ObjectHideFlags: 0

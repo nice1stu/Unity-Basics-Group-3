@@ -16,6 +16,8 @@ public class Vehicle : MonoBehaviour
     [SerializeField]
     private float handeling;
     [SerializeField]
+    private float drifting;
+    [SerializeField]
     private float acceleration;
 
     public Renderer body;
@@ -27,6 +29,8 @@ public class Vehicle : MonoBehaviour
     public float moveSpeedMax;
     public float handelingMin;
     public float handelingMax;
+    public float driftingMin;
+    public float driftingMax;
     public float accelerationMin;
     public float accelerationMax;
 
@@ -34,24 +38,47 @@ public class Vehicle : MonoBehaviour
     private float horizontalInput;
 
     public bool driving;
+    public bool braking;
     private void Start()
     {
         body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
         handeling = Random.Range(handelingMin, handelingMax);
         acceleration = Random.Range(accelerationMin, accelerationMax);
+        drifting = Random.Range(driftingMin, driftingMax);
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     void drive()
     {
-
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            braking = true;
+        }
+        else
+        {
+            braking = false;
+        }
         if (horizontalInput > .1f)
         {
-            transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            if (braking)
+            {
+                transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed)*drifting, 0f);
+            }
+            else
+            {
+                transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            }
         }
         if (horizontalInput < -.1f)
         {
-            transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            if (braking)
+            {
+                transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed) * drifting, 0f);
+            }
+            else
+            {
+                transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            }
         }
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
@@ -72,6 +99,17 @@ public class Vehicle : MonoBehaviour
             else
             {
                 CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration));
+            }
+        }
+        if (braking)
+        {
+            if (CurrentMoveSpeed > 0)
+            {
+                CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration) * drifting);
+            }
+            else
+            {
+                CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration) * drifting);
             }
         }
         //this is what actually moves the vehicle
