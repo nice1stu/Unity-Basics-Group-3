@@ -16,16 +16,21 @@ public class Vehicle : MonoBehaviour
     [SerializeField]
     private float handeling;
     [SerializeField]
+    private float drifting;
+    [SerializeField]
     private float acceleration;
 
     public Renderer body;
+    public Rigidbody rb;
     public GameObject driver;
-
+    public CameraMovement cam;
 
     public float moveSpeedMin;
     public float moveSpeedMax;
     public float handelingMin;
     public float handelingMax;
+    public float driftingMin;
+    public float driftingMax;
     public float accelerationMin;
     public float accelerationMax;
 
@@ -33,23 +38,47 @@ public class Vehicle : MonoBehaviour
     private float horizontalInput;
 
     public bool driving;
+    public bool braking;
     private void Start()
     {
-        body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), 0.7f, .8f);
+        body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
         handeling = Random.Range(handelingMin, handelingMax);
         acceleration = Random.Range(accelerationMin, accelerationMax);
+        drifting = Random.Range(driftingMin, driftingMax);
+        //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     void drive()
     {
-
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            braking = true;
+        }
+        else
+        {
+            braking = false;
+        }
         if (horizontalInput > .1f)
         {
-            transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            if (braking)
+            {
+                transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed)*drifting, 0f);
+            }
+            else
+            {
+                transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            }
         }
         if (horizontalInput < -.1f)
         {
-            transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            if (braking)
+            {
+                transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed) * drifting, 0f);
+            }
+            else
+            {
+                transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+            }
         }
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
@@ -72,15 +101,30 @@ public class Vehicle : MonoBehaviour
                 CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration));
             }
         }
+        if (braking)
+        {
+            if (CurrentMoveSpeed > 0)
+            {
+                CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration) * drifting);
+            }
+            else
+            {
+                CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration) * drifting);
+            }
+        }
+        //this is what actually moves the vehicle
+        rb.velocity = transform.forward * CurrentMoveSpeed;
+        rb.angularVelocity = new Vector3(0,0,0);
+        //transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
 
-        transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             driver.SetActive(true);
             driving = false;
             driver.GetComponent<Driver>().inCar = true;
-            CameraMovement cam = driver.GetComponent<Driver>().cam;
-            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), cam.offset.z);
+            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
+            //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-14, 0, 20));
+            //cam.transform.eulerAngles = new Vector3(Mathf.Lerp(45, 90, 20), cam.transform.rotation.y, cam.transform.rotation.z);
         }
     }
     void Update()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Driver : MonoBehaviour
 {
     public float enterCarRange = 2;
@@ -64,6 +65,9 @@ public class Driver : MonoBehaviour
         vehicle.driving = true;
         inCar = true;
         vehicle.driver = gameObject;
-        cam.offset = new Vector3(cam.offset.x,Mathf.Lerp(10, 18, 20), cam.offset.z);
+        vehicle.cam = cam; 
+        cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(13, 18, 20),cam.offset.z);
+        //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(10, 18, 20), Mathf.Lerp(0, -14, 20));
+        //cam.transform.eulerAngles = new Vector3(Mathf.Lerp(90, 45, 20), cam.transform.rotation.y, cam.transform.rotation.z);
     }
 }
