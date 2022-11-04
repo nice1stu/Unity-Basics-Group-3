@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManualWeaponTrigger : MonoBehaviour
+public class SemiAutoWeaponTrigger : MonoBehaviour
 {
     private IWeaponEffect weaponEffect;
 
@@ -20,6 +20,10 @@ public class ManualWeaponTrigger : MonoBehaviour
             weaponEffect.SpawnEffect();
         }
 
+        if (Input.GetButtonDown("ReloadInput"))
+        {
+            
+        }
         
     }
 }
