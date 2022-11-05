@@ -20,6 +20,8 @@ public class Vehicle : MonoBehaviour
     [SerializeField]
     private float acceleration;
 
+
+    public ParticleSystem particleSystem;
     public Renderer body;
     public Rigidbody rb;
     public GameObject driver;
@@ -113,6 +115,7 @@ public class Vehicle : MonoBehaviour
             }
         }
         //this is what actually moves the vehicle
+        particleSystem.emissionRate = Mathf.Pow(CurrentMoveSpeed,2);
         rb.velocity = transform.forward * CurrentMoveSpeed;
         rb.angularVelocity = new Vector3(0,0,0);
         //transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
@@ -125,6 +128,7 @@ public class Vehicle : MonoBehaviour
             cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
             //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-14, 0, 20));
             //cam.transform.eulerAngles = new Vector3(Mathf.Lerp(45, 90, 20), cam.transform.rotation.y, cam.transform.rotation.z);
+            particleSystem.emissionRate = 0;
         }
     }
     void Update()
