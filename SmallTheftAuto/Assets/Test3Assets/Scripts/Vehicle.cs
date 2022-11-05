@@ -8,7 +8,7 @@ public class Vehicle : MonoBehaviour
     private float moveSpeed;
     [SerializeField]
     private float _currentMoveSpeed;
-    private float CurrentMoveSpeed 
+    public float CurrentMoveSpeed 
     {
         set { _currentMoveSpeed = Mathf.Clamp(value, -moveSpeed/2, moveSpeed); }
         get { return _currentMoveSpeed;  }
@@ -50,7 +50,31 @@ public class Vehicle : MonoBehaviour
         drifting = Random.Range(driftingMin, driftingMax);
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
-    void drive()
+    void Simulate()
+    {
+
+        //this is what actually moves the vehicle
+        particleSystem.emissionRate = Mathf.Pow(CurrentMoveSpeed, 2);
+        rb.velocity = transform.forward * CurrentMoveSpeed;
+        rb.angularVelocity = new Vector3(0, 0, 0);
+        if (!driving)
+        {
+            LoseMomentum();
+        }
+    }
+    void LoseMomentum()
+    {
+
+        if (CurrentMoveSpeed > 0)
+        {
+            CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration));
+        }
+        else
+        {
+            CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration));
+        }
+    }
+    void Drive()
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -94,14 +118,7 @@ public class Vehicle : MonoBehaviour
         }
         else
         {
-            if (CurrentMoveSpeed > 0)
-            {
-                CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration));
-            }
-            else
-            {
-                CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration));
-            }
+            LoseMomentum();
         }
         if (braking)
         {
@@ -114,10 +131,6 @@ public class Vehicle : MonoBehaviour
                 CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration) * drifting);
             }
         }
-        //this is what actually moves the vehicle
-        particleSystem.emissionRate = Mathf.Pow(CurrentMoveSpeed,2);
-        rb.velocity = transform.forward * CurrentMoveSpeed;
-        rb.angularVelocity = new Vector3(0,0,0);
         //transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -135,8 +148,9 @@ public class Vehicle : MonoBehaviour
     {
         if (driving)
         {
-            drive();
+            Drive();
         }
+        Simulate();
     }
 
 }

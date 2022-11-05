@@ -63,6 +63,7 @@ public class Driver : MonoBehaviour
         transform.SetParent(GetClosestCar());
         gameObject.SetActive(false);
         vehicle.driving = true;
+        vehicle.CurrentMoveSpeed = 0;
         inCar = true;
         vehicle.driver = gameObject;
         vehicle.cam = cam; 
