@@ -22,6 +22,7 @@ public class Vehicle : MonoBehaviour
 
 
     public ParticleSystem particleSystem;
+    public ParticleSystem[] driftParticleSystem;
     public Renderer body;
     public Rigidbody rb;
     public GameObject driver;
@@ -79,10 +80,20 @@ public class Vehicle : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             braking = true;
+            for (int i = 0; i < 4; i++)
+            {
+                driftParticleSystem[i].Play();
+                driftParticleSystem[i].emissionRate = Mathf.Pow(CurrentMoveSpeed, 2.2f);
+            }
         }
         else
         {
             braking = false;
+            for (int i = 0; i < 4; i++)
+            {
+                driftParticleSystem[i].Stop();
+                driftParticleSystem[i].emissionRate = Mathf.Pow(CurrentMoveSpeed, 2.2f);
+            }
         }
         if (horizontalInput > .1f)
         {
