@@ -11,7 +11,7 @@ public class Questobject : MonoBehaviour
    public GameObject Steak;
 
 
-   private void OnCollisionEnter(Collider other)
+   private void OnTriggerEnter(Collider other)
    {
       Arrow.SetActive(false);
       Quest.SetActive(true);

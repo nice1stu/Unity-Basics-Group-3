@@ -9,7 +9,7 @@ public class DeathZone : MonoBehaviour
     public GameObject Player;
     public Transform destination;
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
         Wasted.SetActive(true);
         Time.timeScale = 0.3f;
