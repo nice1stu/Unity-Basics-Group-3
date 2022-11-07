@@ -18,7 +18,21 @@ public class PlayerStatus : MonoBehaviour
         
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
+    {
+        Mathf.Clamp(hp.value -= damage, 0, 100);
+        if (hp.value <= 0)
+        {
+            Death();
+        }
+    }
+
+    public void Heal(int healAmount)
+    {
+        Mathf.Clamp(hp.value += healAmount, 0, 100);
+    }
+
+    void Death()
     {
         
     }
