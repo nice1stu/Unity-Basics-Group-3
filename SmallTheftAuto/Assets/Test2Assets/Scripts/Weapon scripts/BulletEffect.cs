@@ -17,7 +17,11 @@ public class BulletEffect : MonoBehaviour, IWeaponEffect
     {
         if (ammo.TryConsume())
         {
-            Instantiate(bulletPrefab, transform.position, transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+            if (bullet.TryGetComponent(out Rigidbody rb))
+            {
+                rb.AddForce(Vector3.forward * 200);
+            }
         }
         else
         {
