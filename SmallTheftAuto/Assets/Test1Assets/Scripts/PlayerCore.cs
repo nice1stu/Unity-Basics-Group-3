@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerCore : MonoBehaviour
 {
     public GameObject player;
-    //public TextMeshProUGUI dollars;
+    public TextMeshProUGUI dollars;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q)) //Save Game
@@ -15,7 +15,7 @@ public class PlayerCore : MonoBehaviour
             PlayerPrefs.SetFloat("playerPositionX", playerPosition.x);
             PlayerPrefs.SetFloat("playerPositionY", playerPosition.y);
             PlayerPrefs.SetFloat("playerPositionZ", playerPosition.z);
-            //PlayerPrefs.SetString("dollars", dollars.text);
+            PlayerPrefs.SetString("dollars", dollars.text);
             PlayerPrefs.Save();
             Debug.Log("playerPosition" + playerPosition + dollars);
         }
