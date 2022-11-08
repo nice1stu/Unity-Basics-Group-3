@@ -17,6 +17,6 @@ public class MoneySystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Money.text = "Money: "+ dosh.value;
     }
 }
