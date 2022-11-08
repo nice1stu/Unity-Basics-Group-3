@@ -23,5 +23,6 @@ public class StartPage : MonoBehaviour
     public void ExitGame()
     {
         Debug.Log("Quit Game... Thanks for playing");
+        Application.Quit();
     }
 }
