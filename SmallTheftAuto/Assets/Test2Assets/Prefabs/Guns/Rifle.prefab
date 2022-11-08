@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e29ae416a5643b499064d5cdbf2f35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCooldown: 1
+  cooldownDuration: 0.1
 --- !u!114 &1557390420593516525
 MonoBehaviour:
   m_ObjectHideFlags: 0
