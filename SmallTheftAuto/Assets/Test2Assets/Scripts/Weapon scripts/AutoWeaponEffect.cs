@@ -26,7 +26,7 @@ public class AutoWeaponEffect : MonoBehaviour
 
         if (Input.GetButtonDown("ReloadInput"))
         {
-            
+            weaponEffect.ReloadEffect();
         }
     }
 

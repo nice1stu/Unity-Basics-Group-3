@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float bulletSpeed = 20f;
     private Rigidbody rb;
 
     private void Start()
@@ -13,8 +12,4 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // void Update()
-    // {
-    //     rb.velocity = Vector3.forward * (bulletSpeed * Time.deltaTime);
-    // }
 }

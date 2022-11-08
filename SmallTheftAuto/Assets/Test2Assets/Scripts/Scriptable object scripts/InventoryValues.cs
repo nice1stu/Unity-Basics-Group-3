@@ -6,6 +6,6 @@ using UnityEngine;
         public int money;
         [Header("Owned Weapons")] 
         public bool hasPistol;
-        public bool hasSMG;
+        public bool hasRifle;
         
     }

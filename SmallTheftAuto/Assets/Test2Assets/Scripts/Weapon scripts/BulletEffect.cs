@@ -20,12 +20,22 @@ public class BulletEffect : MonoBehaviour, IWeaponEffect
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             if (bullet.TryGetComponent(out Rigidbody rb))
             {
-                rb.AddForce(Vector3.forward * 200);
+                rb.velocity = rb.transform.forward * 20;
             }
+            //play shoot sound
         }
         else
         {
             // play empty mag sound
+        }
+    }
+
+    public void ReloadEffect()
+    {
+        if (ammo.TryReload())
+        {
+            Debug.Log("Reloaded");
+            //play reload sound
         }
     }
 }

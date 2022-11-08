@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d9b9041d254464f84951e40fa0e1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownDuration: 0.3
 --- !u!114 &1809811985522380212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,4 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magSize: 12
-  maxSpareAmmo: 0
+  maxSpareAmmo: 120

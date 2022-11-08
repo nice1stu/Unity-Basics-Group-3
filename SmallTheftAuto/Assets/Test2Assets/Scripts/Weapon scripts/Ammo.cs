@@ -16,6 +16,7 @@ public class Ammo : MonoBehaviour
     void Start()
     {
         magSizeLeft = magSize;
+        spareAmmo = maxSpareAmmo;
     }
     
     public bool TryConsume()

@@ -10,8 +10,11 @@ public class Steakpickup : MonoBehaviour
     public GameObject Questcomplete;
     public GameObject Steak;
     public TextMeshProUGUI Money;
+
+   
     private void OnTriggerEnter(Collider other)
     {
+        dosh.value += 500;
         Money.text = "Money: "+ dosh.value;
         Questcomplete.SetActive(true);
         Invoke("deactivate", 2f);
