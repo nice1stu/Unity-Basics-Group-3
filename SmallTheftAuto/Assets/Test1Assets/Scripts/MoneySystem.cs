@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MoneySystem : MonoBehaviour
 {
-    public TextMeshProUGUI txt;
+    public TextMeshProUGUI Money;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Money.text = "Money: "+ 0;
     }
 
     // Update is called once per frame

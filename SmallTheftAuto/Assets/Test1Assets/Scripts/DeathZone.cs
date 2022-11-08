@@ -5,21 +5,29 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
+    public GameObject GreyDeathScreen;
     public GameObject Wasted;
     public GameObject Player;
     public Transform destination;
 
     private void OnTriggerEnter(Collider other)
     {
-        Wasted.SetActive(true);
+        GreyDeathScreen.SetActive(true);
+        Invoke("death", 0.5f);
         Time.timeScale = 0.3f;
         Invoke("respawn", 1f);
         
     }
+    public void death()
+    {
+    Wasted.SetActive(true);
+    }
+    
 
     public void respawn()
     {
         Time.timeScale = 1;
+        GreyDeathScreen.SetActive(false);
         Wasted.SetActive(false);
         Player.transform.position = destination.position;
         

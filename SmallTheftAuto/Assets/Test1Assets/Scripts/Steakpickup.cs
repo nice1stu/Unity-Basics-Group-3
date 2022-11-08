@@ -10,6 +10,8 @@ public class Steakpickup : MonoBehaviour
     public GameObject Questcomplete;
     public GameObject Steak;
     public TextMeshProUGUI Money;
+
+   
     private void OnTriggerEnter(Collider other)
     {
         Money.text = "Money: "+ dosh.value;
