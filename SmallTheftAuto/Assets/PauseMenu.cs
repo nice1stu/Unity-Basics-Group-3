@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GamePaused = false;
     public GameObject PauseMenuUI;
     public GameObject player;
-    public int moneyCollected;
+    public NumericValue moneyCollected;
     public int playerHealth;
     void Update()
     {
@@ -47,9 +47,9 @@ public class PauseMenu : MonoBehaviour
         float playerPositionY = PlayerPrefs.GetFloat("playerPositionY");
         float playerPositionZ = PlayerPrefs.GetFloat("playerPositionZ");
         Vector3 playerPosition = new Vector3(playerPositionX, playerPositionY, playerPositionZ);
-        moneyCollected = PlayerPrefs.GetInt("moneyCollected");
+        moneyCollected.value = PlayerPrefs.GetInt("moneyCollected");
         playerHealth = PlayerPrefs.GetInt("playerHealth");
-        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + playerHealth + "moneyCollected" + moneyCollected);
+        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + playerHealth + "moneyCollected" + moneyCollected.value);
 
         player.transform.position = playerPosition;
     }
