@@ -68,11 +68,11 @@ public class Vehicle : MonoBehaviour
 
         if (CurrentMoveSpeed > 0)
         {
-            CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration));
+            CurrentMoveSpeed = CurrentMoveSpeed - (Time.fixedDeltaTime * (acceleration));
         }
         else
         {
-            CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration));
+            CurrentMoveSpeed = CurrentMoveSpeed + (Time.fixedDeltaTime * (acceleration));
         }
     }
     void Drive()
@@ -99,35 +99,28 @@ public class Vehicle : MonoBehaviour
         {
             if (braking)
             {
-                transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed)*drifting, 0f);
+                transform.Rotate(0f, (handeling * Time.fixedDeltaTime) * (CurrentMoveSpeed / moveSpeed)*drifting, 0f);
             }
             else
             {
-                transform.Rotate(0f, (handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+                transform.Rotate(0f, (handeling * Time.fixedDeltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
             }
         }
         if (horizontalInput < -.1f)
         {
             if (braking)
             {
-                transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed) * drifting, 0f);
+                transform.Rotate(0f, -(handeling * Time.fixedDeltaTime) * (CurrentMoveSpeed / moveSpeed) * drifting, 0f);
             }
             else
             {
-                transform.Rotate(0f, -(handeling * Time.deltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
+                transform.Rotate(0f, -(handeling * Time.fixedDeltaTime) * (CurrentMoveSpeed / moveSpeed), 0f);
             }
         }
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
-        if (verticalInput > .1f)
-        {
-            CurrentMoveSpeed = CurrentMoveSpeed + Time.deltaTime * acceleration;
-        }
-        else if (verticalInput < -.1f)
-        {
-            CurrentMoveSpeed = CurrentMoveSpeed - Time.deltaTime * acceleration;
-        }
-        else
+        CurrentMoveSpeed += verticalInput * Time.fixedDeltaTime * acceleration;
+        if (Mathf.Abs(verticalInput) < .1f)
         {
             LoseMomentum();
         }
@@ -135,11 +128,11 @@ public class Vehicle : MonoBehaviour
         {
             if (CurrentMoveSpeed > 0)
             {
-                CurrentMoveSpeed = CurrentMoveSpeed - (Time.deltaTime * (acceleration) * drifting);
+                CurrentMoveSpeed = CurrentMoveSpeed - (Time.fixedDeltaTime * (acceleration) * drifting);
             }
             else
             {
-                CurrentMoveSpeed = CurrentMoveSpeed + (Time.deltaTime * (acceleration) * drifting);
+                CurrentMoveSpeed = CurrentMoveSpeed + (Time.fixedDeltaTime * (acceleration) * drifting);
             }
         }
         //transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
@@ -155,7 +148,7 @@ public class Vehicle : MonoBehaviour
             particleSystem.emissionRate = 0;
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         if (driving)
         {

@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour
     public float smoothness;
     private Vector3 velocity = Vector3.zero;
 
-    private void FixedUpdate()
+    private void Update()
     {
         CamFollow();
     }
