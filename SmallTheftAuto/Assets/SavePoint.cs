@@ -9,6 +9,6 @@ public class SavePoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnCollisionEnter
+        //OnCollisionEnter
     }
 }
