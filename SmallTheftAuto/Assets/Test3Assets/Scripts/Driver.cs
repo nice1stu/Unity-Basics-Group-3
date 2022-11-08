@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class Driver : MonoBehaviour
 {
     public float enterCarRange = 2;
     public CameraMovement cam;
+    public GameObject vCam;
 
     private Vehicle vehicle;
 
@@ -56,7 +58,6 @@ public class Driver : MonoBehaviour
     }
 
     private bool IsWithinCarDistance => Vector3.Distance(transform.position, GetClosestCar().position) <= enterCarRange;
-
     void EnterCar()
     {
         transform.position = GetClosestCar().transform.position;
@@ -67,8 +68,9 @@ public class Driver : MonoBehaviour
         inCar = true;
         vehicle.driver = gameObject;
         vehicle.cam = cam; 
-        cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(13, 18, 20),cam.offset.z);
-        //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(10, 18, 20), Mathf.Lerp(0, -14, 20));
-        //cam.transform.eulerAngles = new Vector3(Mathf.Lerp(90, 45, 20), cam.transform.rotation.y, cam.transform.rotation.z);
+        vehicle.vCam = vCam; 
+        //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(13, 18, 20),cam.offset.z);
+        cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(10, 18, 20), Mathf.Lerp(0, -18, 20));
+        cam.targetAngle = -45;
     }
 }

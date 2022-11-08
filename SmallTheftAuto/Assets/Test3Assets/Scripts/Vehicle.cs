@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed;
-    [SerializeField]
+    public float moveSpeed;
     private float _currentMoveSpeed;
     public float CurrentMoveSpeed 
     {
         set { _currentMoveSpeed = Mathf.Clamp(value, -moveSpeed/2, moveSpeed); }
         get { return _currentMoveSpeed;  }
     }
+    public float handeling;
+    public float drifting;
+    public float acceleration;
+    public float health;
+    private float _gas;
     [SerializeField]
-    private float handeling;
-    [SerializeField]
-    private float drifting;
-    [SerializeField]
-    private float acceleration;
+    public float Gas
+    {
+        set { _gas = Mathf.Clamp(value, 0, gasTank); }
+        get { return _gas; }
+    }
+    public float gasTank;
 
 
     public ParticleSystem particleSystem;
@@ -27,6 +31,8 @@ public class Vehicle : MonoBehaviour
     public Rigidbody rb;
     public GameObject driver;
     public CameraMovement cam;
+    public GameObject vCam;
+    public ParticleSystem explosion;
 
     public float moveSpeedMin;
     public float moveSpeedMax;
@@ -36,6 +42,12 @@ public class Vehicle : MonoBehaviour
     public float driftingMax;
     public float accelerationMin;
     public float accelerationMax;
+    public int healthMin;
+    public int healthMax;
+    public float gasTankMin;
+    public float gasTankMax;
+
+    private float currentVelocity;
 
     private float verticalInput;
     private float horizontalInput;
@@ -49,6 +61,9 @@ public class Vehicle : MonoBehaviour
         handeling = Random.Range(handelingMin, handelingMax);
         acceleration = Random.Range(accelerationMin, accelerationMax);
         drifting = Random.Range(driftingMin, driftingMax);
+        health = Random.Range(healthMin, healthMax);
+        gasTank = Random.Range(gasTankMin, gasTankMax);
+        Gas = Random.Range(gasTankMin, gasTankMax);
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     void Simulate()
@@ -61,6 +76,21 @@ public class Vehicle : MonoBehaviour
         if (!driving)
         {
             LoseMomentum();
+            rb.mass = 600;
+        }
+        else
+        {
+            rb.mass = 60;
+        }
+
+        if (vCam != null)
+        {
+            //vCam.transform.eulerAngles = new Vector3(vCam.transform.eulerAngles.x, transform.eulerAngles.y, vCam.transform.eulerAngles.z);   
+        }
+        
+        if (health <= 0)
+        {
+            explosion.Play();
         }
     }
     void LoseMomentum()
@@ -119,7 +149,11 @@ public class Vehicle : MonoBehaviour
         }
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
-        CurrentMoveSpeed += verticalInput * Time.fixedDeltaTime * acceleration;
+        if (Gas > 0)
+        {
+            CurrentMoveSpeed += verticalInput * Time.fixedDeltaTime * acceleration;
+            Gas -= (CurrentMoveSpeed * Time.deltaTime) * 0.01f;
+        }
         if (Mathf.Abs(verticalInput) < .1f)
         {
             LoseMomentum();
@@ -142,10 +176,10 @@ public class Vehicle : MonoBehaviour
             driver.SetActive(true);
             driving = false;
             driver.GetComponent<Driver>().inCar = true;
-            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
-            //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-14, 0, 20));
-            //cam.transform.eulerAngles = new Vector3(Mathf.Lerp(45, 90, 20), cam.transform.rotation.y, cam.transform.rotation.z);
+            //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
+            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
             particleSystem.emissionRate = 0;
+            cam.targetAngle = 0;
         }
     }
     void FixedUpdate()
