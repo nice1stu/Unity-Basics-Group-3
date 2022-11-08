@@ -1,40 +1,51 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour
+namespace Test1Assets.Scripts
 {
-    public static bool gamePaused = false;
-    public GameObject pauseMenuUI;
-
-    private void Update()
+    public class PauseMenu : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (gamePaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+        private static bool GamePaused;
+        public GameObject pauseMenuUI;
 
-        void Resume()
+        void Update()
         {
-            pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            gamePaused = false;
-        }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GamePaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
+            }
 
-        void Pause()
-        {
-            pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
-            gamePaused = true;
+            void Resume()
+            {
+                pauseMenuUI.SetActive(false);
+                Time.timeScale = 1f;
+                GamePaused = false;
+            }
+
+            void Pause()
+            {
+                pauseMenuUI.SetActive(true);
+                Time.timeScale = 0f;
+                GamePaused = true;
+            }
+
+            void LoadMenu()
+            {
+                Debug.Log("Load Game ...");
+            }
+
+            void QuitGame()
+            {
+                Debug.Log("Thanks for playing");
+            }
         }
     }
 }
