@@ -284,6 +284,25 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 3567327876694832246, guid: 1e47f5c445cbb48499a011f0b27ec2d6, type: 3}
   m_PrefabInstance: {fileID: 3567327876113980843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1320412064 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2331639932768438347, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
+  m_PrefabInstance: {fileID: 2331639932826161492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1320412070
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320412064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.99
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!114 &1335712035 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3567327876694832244, guid: 1e47f5c445cbb48499a011f0b27ec2d6, type: 3}
@@ -505,6 +524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2331639932768438388, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2331639932768438389, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
       propertyPath: cam
       value: 
@@ -553,7 +576,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6302169511069053818, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
 --- !u!1001 &3567327876113980843
 PrefabInstance:
