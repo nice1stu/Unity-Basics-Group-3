@@ -14,6 +14,7 @@ public class Steakpickup : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
+        dosh.value += 500;
         Money.text = "Money: "+ dosh.value;
         Questcomplete.SetActive(true);
         Invoke("deactivate", 2f);
