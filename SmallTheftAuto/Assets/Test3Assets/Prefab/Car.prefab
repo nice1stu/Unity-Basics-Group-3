@@ -24069,6 +24069,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3010155615933899071}
+  - component: {fileID: 4048388607432876205}
   m_Layer: 0
   m_Name: Carmodel3
   m_TagString: Untagged
@@ -24092,6 +24093,19 @@ Transform:
   m_Father: {fileID: 8768188417660067593}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4048388607432876205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7553928421183064613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec15ad3b9eacdee48a2501e571458f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisModel: {fileID: 5711025816185435772}
 --- !u!1 &8768188416242740719
 GameObject:
   m_ObjectHideFlags: 0
@@ -24101,6 +24115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8768188416242740716}
+  - component: {fileID: 8722430451892461166}
   m_Layer: 0
   m_Name: Carmodel2
   m_TagString: Untagged
@@ -24124,6 +24139,19 @@ Transform:
   m_Father: {fileID: 8768188417660067593}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8722430451892461166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768188416242740719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec15ad3b9eacdee48a2501e571458f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisModel: {fileID: 3964247911205222837}
 --- !u!1 &8768188417660067595
 GameObject:
   m_ObjectHideFlags: 0
@@ -24191,6 +24219,10 @@ MonoBehaviour:
   - {fileID: 7056792271110664739}
   - {fileID: 6866102560861389864}
   - {fileID: 2794774469887501863}
+  bodies:
+  - {fileID: 7814260775259252495}
+  - {fileID: 8722430451892461166}
+  - {fileID: 4048388607432876205}
   body: {fileID: 8768188416732218447}
   rb: {fileID: 2794259687632498843}
   driver: {fileID: 0}
@@ -24249,6 +24281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8768188417713625402}
+  - component: {fileID: 7814260775259252495}
   m_Layer: 0
   m_Name: Carmodel1
   m_TagString: Untagged
@@ -24272,6 +24305,19 @@ Transform:
   m_Father: {fileID: 8768188417660067593}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7814260775259252495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768188417713625405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec15ad3b9eacdee48a2501e571458f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisModel: {fileID: 8768188416732218447}
 --- !u!1001 &1490431014429740691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24334,6 +24380,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80f0c9bb970c00d45b4ebd5ccb51c68a, type: 3}
   m_PrefabInstance: {fileID: 1490431014429740691}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &3964247911205222837 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6652725513331149018, guid: 80f0c9bb970c00d45b4ebd5ccb51c68a, type: 3}
+  m_PrefabInstance: {fileID: 1490431014429740691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5711025816187596316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24391,6 +24442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e985c0fb2658c4bb66c0dd53fe253c, type: 3}
+--- !u!23 &5711025816185435772 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: d1e985c0fb2658c4bb66c0dd53fe253c, type: 3}
+  m_PrefabInstance: {fileID: 5711025816187596316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5711025816187729086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400034, guid: d1e985c0fb2658c4bb66c0dd53fe253c, type: 3}

@@ -27,6 +27,7 @@ public class Vehicle : MonoBehaviour
 
     public ParticleSystem particleSystem;
     public ParticleSystem[] driftParticleSystem;
+    public ModelContainer[] bodies;
     public Renderer body;
     public Rigidbody rb;
     public GameObject driver;
@@ -64,6 +65,20 @@ public class Vehicle : MonoBehaviour
         health = Random.Range(healthMin, healthMax);
         gasTank = Random.Range(gasTankMin, gasTankMax);
         Gas = Random.Range(gasTankMin, gasTankMax);
+
+        int thisModel = Random.Range(0, 3);
+        for (int i = 0; i < bodies.Length; i++)
+        {
+            if (i == thisModel)
+            {
+                body = bodies[i].thisModel;
+                bodies[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                bodies[i].gameObject.SetActive(false);
+            }
+        }
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     void Simulate()
