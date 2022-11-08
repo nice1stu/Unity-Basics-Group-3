@@ -8,6 +8,9 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GamePaused = false;
     public GameObject PauseMenuUI;
+    public GameObject player;
+    public int moneyCollected;
+    public int playerHealth;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -40,6 +43,15 @@ public class PauseMenu : MonoBehaviour
     public void LoadGame()
     {
         Debug.Log("Load Game...");
+        float playerPositionX = PlayerPrefs.GetFloat("playerPositionX");
+        float playerPositionY = PlayerPrefs.GetFloat("playerPositionY");
+        float playerPositionZ = PlayerPrefs.GetFloat("playerPositionZ");
+        Vector3 playerPosition = new Vector3(playerPositionX, playerPositionY, playerPositionZ);
+        moneyCollected = PlayerPrefs.GetInt("moneyCollected");
+        playerHealth = PlayerPrefs.GetInt("playerHealth");
+        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + playerHealth + "moneyCollected" + moneyCollected);
+
+        player.transform.position = playerPosition;
     }
 
     public void RestartGame()

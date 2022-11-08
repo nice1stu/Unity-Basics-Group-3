@@ -10,10 +10,15 @@ public class CameraMovement : MonoBehaviour
     public Vector3 offset;
     public float smoothness;
     private Vector3 velocity = Vector3.zero;
+    private float cameraAngle = 0;
+    public float targetAngle = 0;
+    private float angularVelocity;
 
-    private void FixedUpdate()
+    private void Update()
     {
         CamFollow();
+        cameraAngle = Mathf.SmoothDampAngle(cameraAngle, targetAngle, ref angularVelocity, 0.2f);
+        transform.localEulerAngles = new Vector3(cameraAngle,0, 0);
     }
 
     void CamFollow()

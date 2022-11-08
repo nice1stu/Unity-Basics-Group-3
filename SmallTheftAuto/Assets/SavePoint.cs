@@ -12,6 +12,11 @@ public class SavePoint : MonoBehaviour
     
         void OnTriggerEnter(Collider other)
         {
+            Save();
+        }
+
+        void Save()
+        {
             Vector3 playerPosition = player.transform.position;
             PlayerPrefs.SetFloat("playerPositionX", playerPosition.x);
             PlayerPrefs.SetFloat("playerPositionY", playerPosition.y);
@@ -20,6 +25,6 @@ public class SavePoint : MonoBehaviour
             PlayerPrefs.SetInt("playerHealth", playerHealth);
             PlayerPrefs.Save();
             Debug.Log("playerPosition " + playerPosition + ", PlayerHealth " + playerHealth + ", moneyCollected " +
-                      moneyCollected);
+                      moneyCollected); 
         }
 }
