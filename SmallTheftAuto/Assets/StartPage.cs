@@ -9,17 +9,10 @@ public class StartPage : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
     public void LoadGame()
     {
         Debug.Log("Load Game");
     }
-
-    public void Options()
-    {
-        
-    }
-
     public void ExitGame()
     {
         Debug.Log("Quit Game... Thanks for playing");
