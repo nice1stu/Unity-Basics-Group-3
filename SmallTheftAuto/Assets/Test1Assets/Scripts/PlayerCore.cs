@@ -13,7 +13,7 @@ public class PlayerCore : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) //Save Game
+        /*if (Input.GetKeyDown(KeyCode.Q)) //Save Game
         {
             Vector3 playerPosition = player.transform.position;
             PlayerPrefs.SetFloat("playerPositionX", playerPosition.x);
@@ -24,7 +24,7 @@ public class PlayerCore : MonoBehaviour
             //PlayerPrefs.SetString("dollars", dollars.text);
             PlayerPrefs.Save();
             Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + playerHealth + "moneyCollected" + moneyCollected);
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.E)) //Load Game
         {
