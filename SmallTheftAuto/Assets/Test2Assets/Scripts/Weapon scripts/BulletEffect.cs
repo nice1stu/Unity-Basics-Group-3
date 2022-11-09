@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletEffect : MonoBehaviour, IWeaponEffect
 {
+    public int damage = 25;
     private Ammo ammo;
     public GameObject bulletPrefab;
 
@@ -21,6 +22,11 @@ public class BulletEffect : MonoBehaviour, IWeaponEffect
             if (bullet.TryGetComponent(out Rigidbody rb))
             {
                 rb.velocity = rb.transform.forward * 20;
+            }
+
+            if (bullet.TryGetComponent(out Bullet bulletScript))
+            {
+                bulletScript.damage = damage;
             }
             //play shoot sound
         }
