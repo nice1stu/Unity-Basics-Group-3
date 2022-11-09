@@ -14,16 +14,21 @@ public class CameraMovement : MonoBehaviour
     public float targetAngle = 0;
     private float angularVelocity;
 
+    public bool isDriving;
     private void Update()
     {
         CamFollow();
         cameraAngle = Mathf.SmoothDampAngle(cameraAngle, targetAngle, ref angularVelocity, 0.2f);
         transform.localEulerAngles = new Vector3(cameraAngle,0, 0);
+        if (isDriving)
+        {
+            transform.LookAt(player.position);
+        }
     }
 
     void CamFollow()
     {
-        Vector3 targetPosition = player.position + offset;
+        Vector3 targetPosition = player.position + player.transform.localToWorldMatrix.MultiplyVector(offset);
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothness);
     }
 }

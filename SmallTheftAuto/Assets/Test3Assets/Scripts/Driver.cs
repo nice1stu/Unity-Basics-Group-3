@@ -62,6 +62,7 @@ public class Driver : MonoBehaviour
     {
         transform.position = GetClosestCar().transform.position;
         transform.SetParent(GetClosestCar());
+        transform.localEulerAngles = Vector3.zero;
         gameObject.SetActive(false);
         vehicle.driving = true;
         vehicle.CurrentMoveSpeed = 0;
@@ -72,5 +73,6 @@ public class Driver : MonoBehaviour
         //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(13, 18, 20),cam.offset.z);
         cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(10, 18, 20), Mathf.Lerp(0, -18, 20));
         cam.targetAngle = -45;
+        cam.isDriving = true;
     }
 }
