@@ -52,7 +52,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         Money.text = "Money: " + dosh.value;
         GreyDeathScreen.SetActive(false);
         Wasted.SetActive(false);
-        transform.position = destination.position;
         Debug.Log("Load Game...");
         float playerPositionX = PlayerPrefs.GetFloat("playerPositionX");
         float playerPositionY = PlayerPrefs.GetFloat("playerPositionY");
