@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class TrafficGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject[] waypoints;
+    //[SerializeField] GameObject[] waypoints;
     public GameObject movingObject; //car or pedestrian
-    public int speed;
-    private int currentWaypoint = 0;
-    private float waypointRadius = 2;
+    //public int speed;
+    //private int currentWaypoint = 0;
+    //private float waypointRadius = 2;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class TrafficGenerator : MonoBehaviour
         Debug.Log("spawn car");
     }
 
-    void Update()
+    /*void Update()
     {
 
     if (Vector3.Distance(transform.position, waypoints[currentWaypoint].transform.position) < waypointRadius)
@@ -31,7 +31,7 @@ public class TrafficGenerator : MonoBehaviour
     }
 
     transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].transform.position, speed * Time.deltaTime);
-    }
+    }*/
 }
 
 
