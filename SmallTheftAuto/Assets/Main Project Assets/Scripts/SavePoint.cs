@@ -7,7 +7,7 @@ public class SavePoint : MonoBehaviour
 {
     public GameObject player;
     public NumericValue moneyCollected;
-    public int playerHealth;
+    public NumericValue hp;
     // Update is called once per frame
     
         void OnTriggerEnter(Collider other)
@@ -22,9 +22,9 @@ public class SavePoint : MonoBehaviour
             PlayerPrefs.SetFloat("playerPositionY", playerPosition.y);
             PlayerPrefs.SetFloat("playerPositionZ", playerPosition.z);
             PlayerPrefs.SetInt("moneyCollected", moneyCollected.value);
-            PlayerPrefs.SetInt("playerHealth", playerHealth);
+            PlayerPrefs.SetInt("playerHealth", hp.value);
             PlayerPrefs.Save();
-            Debug.Log("playerPosition " + playerPosition + ", PlayerHealth " + playerHealth + ", moneyCollected " +
+            Debug.Log("playerPosition " + playerPosition + ", PlayerHealth " + hp.value + ", moneyCollected " +
                       moneyCollected.value); 
         }
 }

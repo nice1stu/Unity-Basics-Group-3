@@ -10,24 +10,26 @@ public class PlayerStatus : MonoBehaviour, IDamageable
     
     public GameObject GreyDeathScreen;
     public GameObject Wasted;
-    public Transform destination;
     public TextMeshProUGUI Money;
+    public TextMeshProUGUI healthUI;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        hp.value = 100;
+        healthUI.text = $"Health: {hp.value}";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        healthUI.text = $"Health: {hp.value}";
     }
 
     public void TakeDamage(int damage)
     {
         Mathf.Clamp(hp.value -= damage, 0, 100);
+        healthUI.text = $"Health: {hp.value}";
         if (hp.value <= 0)
         {
             StartCoroutine(Death());
@@ -37,6 +39,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable
     public void Heal(int healAmount)
     {
         Mathf.Clamp(hp.value += healAmount, 0, 100);
+        healthUI.text = $"Health: {hp.value}";
     }
 
     IEnumerator Death()
@@ -58,7 +61,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         float playerPositionZ = PlayerPrefs.GetFloat("playerPositionZ");
         Vector3 playerPosition = new Vector3(playerPositionX, playerPositionY, playerPositionZ);
         dosh.value = PlayerPrefs.GetInt("moneyCollected")/2;
-        hp.value = PlayerPrefs.GetInt("playerHealth");
+        hp.value = 100;
         Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + hp.value + "moneyCollected" + dosh.value);
 
         transform.position = playerPosition;

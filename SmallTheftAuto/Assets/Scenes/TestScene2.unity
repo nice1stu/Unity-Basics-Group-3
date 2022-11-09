@@ -300,25 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026e1ddec86d5e848b5571e0fdc148b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1320412064 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2331639932768438347, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
-  m_PrefabInstance: {fileID: 2331639932826161492}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1320412070
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320412064}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.99
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!1 &1352439898
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,8 +409,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 83843362}
     - target: {fileID: 4114982915318325317, guid: 7ee9526c1bb13054fbb54fd2ed87f291, type: 3}
+      propertyPath: offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114982915318325317, guid: 7ee9526c1bb13054fbb54fd2ed87f291, type: 3}
       propertyPath: offset.y
-      value: 8
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114982915318325317, guid: 7ee9526c1bb13054fbb54fd2ed87f291, type: 3}
+      propertyPath: offset.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4114982916036785456, guid: 7ee9526c1bb13054fbb54fd2ed87f291, type: 3}
       propertyPath: m_Name
@@ -695,10 +684,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2331639932768438388, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2331639932768438389, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
       propertyPath: cam
       value: 
@@ -747,8 +732,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6302169511069053818, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
 --- !u!1001 &2614449423081097116
 PrefabInstance:
