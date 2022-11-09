@@ -4945,7 +4945,7 @@ GameObject:
   - component: {fileID: 2331639932768438389}
   - component: {fileID: 2331639932768438391}
   - component: {fileID: 2045658631}
-  - component: {fileID: 6302169511069053818}
+  - component: {fileID: 1320412070}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -4984,7 +4984,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2331639932768438389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5034,8 +5034,8 @@ MonoBehaviour:
   cam: {fileID: 0}
   vCam: {fileID: 0}
   inCar: 0
---- !u!65 &6302169511069053818
-BoxCollider:
+--- !u!136 &1320412070
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5044,9 +5044,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7400639, y: 1.8536083, z: 0.37022945}
-  m_Center: {x: 0.020501494, y: 0.9205803, z: -0.004824713}
+  m_Radius: 0.5
+  m_Height: 1.99
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!1 &8187764346002175484
 GameObject:
   m_ObjectHideFlags: 0
