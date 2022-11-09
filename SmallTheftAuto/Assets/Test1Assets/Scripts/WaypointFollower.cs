@@ -8,7 +8,7 @@ public class WaypointFollower : MonoBehaviour
     public GameObject movingObject; //car or pedestrian
     public int speed;
     private int currentWaypoint = 0;
-    private float waypointRadius = 2;
+    private float waypointRadius = 1;
     // Start is called before the first frame update
     void Start()
     {
