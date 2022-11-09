@@ -203,18 +203,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
             }
         }
         //transform.Translate(0, 0, CurrentMoveSpeed * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            driver.SetActive(true);
-            driving = false;
-            driver.GetComponent<Driver>().inCar = true;
-            //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
-            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
-            particleSystem.emissionRate = 0;
-            cam.targetAngle = 0;
-            cam.isDriving = false;
-        }
+        
     }
 
     public GameObject[] patrolPoints;
@@ -259,6 +248,21 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
             Patrol();
         }
         Simulate();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && driving)
+        {
+            driver.SetActive(true);
+            driving = false;
+            driver.GetComponent<Driver>().inCar = true;
+            //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
+            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
+            particleSystem.emissionRate = 0;
+            cam.targetAngle = 0;
+            cam.isDriving = false;
+        }
     }
 
     public void TakeDamage(int damage)
