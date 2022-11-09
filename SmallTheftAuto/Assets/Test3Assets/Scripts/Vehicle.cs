@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Vehicle : MonoBehaviour, ImFlammable
 {
+    public bool patrolling;
     bool onFire;
     private bool hasExploded = false;
     public GameObject fire;
@@ -140,6 +143,7 @@ public class Vehicle : MonoBehaviour, ImFlammable
     }
     void Drive()
     {
+        patrolling = false;
         if (Input.GetKey(KeyCode.LeftShift))
         {
             braking = true;
@@ -215,11 +219,47 @@ public class Vehicle : MonoBehaviour, ImFlammable
             cam.targetAngle = 0;
         }
     }
+
+    public GameObject[] patrolPoints;
+    public GameObject currentPatrolPoints;
+    public int currentPatrolPointIndex;
+
+    private float currentAngle = 0;
+    public float targetAngle = 0;
+    private float angularVelocity;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 7)
+        {
+            if (currentPatrolPointIndex>=patrolPoints.Length-1)
+            {
+                currentPatrolPointIndex = 0;
+            }
+            else
+            {
+                currentPatrolPointIndex++;
+            }
+            currentPatrolPoints = patrolPoints[currentPatrolPointIndex];
+        }
+    }
+
+    void Patrol()
+    {
+        CurrentMoveSpeed = 14;
+        transform.LookAt(currentPatrolPoints.transform, Vector3.up);
+        rb.velocity = transform.forward * CurrentMoveSpeed;
+        //currentAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref angularVelocity, 0.2f);
+        //transform.localEulerAngles = new Vector3(currentAngle,0, 0);
+    }
     void FixedUpdate()
     {
         if (driving)
         {
             Drive();
+        }
+        else if (patrolling)
+        {
+            Patrol();
         }
         Simulate();
     }
