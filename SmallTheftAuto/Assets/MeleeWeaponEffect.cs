@@ -41,6 +41,7 @@ public class MeleeWeaponEffect : MonoBehaviour
         if (col.gameObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage(damage);
+            hitCol.enabled = false;
         }
     }
     

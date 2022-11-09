@@ -17,13 +17,12 @@ public class DeathZone : MonoBehaviour
     public int playerHealth;
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider col)
     {
-        GreyDeathScreen.SetActive(true);
-        Invoke("death", 0.5f);
-        Time.timeScale = 0.3f;
-        Invoke("respawn", 1f);
-        
+        if (col.gameObject.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.TakeDamage(10000);
+        }
     }
     public void death()
     {
