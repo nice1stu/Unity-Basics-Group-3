@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Vehicle : MonoBehaviour, ImFlammable
+public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
 {
     public bool patrolling;
     bool onFire;
@@ -117,11 +117,7 @@ public class Vehicle : MonoBehaviour, ImFlammable
         {
             rb.mass = 60;
         }
-
-        if (vCam != null)
-        {
-            //vCam.transform.eulerAngles = new Vector3(vCam.transform.eulerAngles.x, transform.eulerAngles.y, vCam.transform.eulerAngles.z);   
-        }
+        
         
         if (health <= 0 && !hasExploded)
         {
@@ -217,6 +213,7 @@ public class Vehicle : MonoBehaviour, ImFlammable
             cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
             particleSystem.emissionRate = 0;
             cam.targetAngle = 0;
+            cam.isDriving = false;
         }
     }
 
@@ -264,4 +261,8 @@ public class Vehicle : MonoBehaviour, ImFlammable
         Simulate();
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+    }
 }

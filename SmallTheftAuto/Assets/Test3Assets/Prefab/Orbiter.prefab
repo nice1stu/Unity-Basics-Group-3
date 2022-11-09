@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  offset: {x: 0, y: 13, z: 0}
+  offset: {x: -21, y: 13, z: 6.9}
   smoothness: 0.2
   targetAngle: 0
 --- !u!1 &4114982916036785456
