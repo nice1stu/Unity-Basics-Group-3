@@ -14,9 +14,9 @@ public class DeathZone : MonoBehaviour
     public GameObject Player;
     public Transform destination;
     public TextMeshProUGUI Money;
-    public int dollars;
+    public int playerHealth;
 
-   
+
     private void OnTriggerEnter(Collider other)
     {
         GreyDeathScreen.SetActive(true);
@@ -27,7 +27,6 @@ public class DeathZone : MonoBehaviour
     }
     public void death()
     {
-        dosh.value /= 2;
         Wasted.SetActive(true);
     }
     
@@ -39,6 +38,16 @@ public class DeathZone : MonoBehaviour
         GreyDeathScreen.SetActive(false);
         Wasted.SetActive(false);
         Player.transform.position = destination.position;
+        Debug.Log("Load Game...");
+        float playerPositionX = PlayerPrefs.GetFloat("playerPositionX");
+        float playerPositionY = PlayerPrefs.GetFloat("playerPositionY");
+        float playerPositionZ = PlayerPrefs.GetFloat("playerPositionZ");
+        Vector3 playerPosition = new Vector3(playerPositionX, playerPositionY, playerPositionZ);
+        dosh.value = PlayerPrefs.GetInt("moneyCollected")/2;
+        playerHealth = PlayerPrefs.GetInt("playerHealth");
+        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + playerHealth + "moneyCollected" + dosh.value);
+
+        Player.transform.position = playerPosition;
         
     }
     

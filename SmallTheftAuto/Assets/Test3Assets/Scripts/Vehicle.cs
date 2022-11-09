@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vehicle : MonoBehaviour
+public class Vehicle : MonoBehaviour, ImFlammable
 {
+    bool onFire;
+    private bool hasExploded = false;
+    public GameObject fire;
+    
     public float moveSpeed;
     private float _currentMoveSpeed;
     public float CurrentMoveSpeed 
@@ -27,6 +31,7 @@ public class Vehicle : MonoBehaviour
 
     public ParticleSystem particleSystem;
     public ParticleSystem[] driftParticleSystem;
+    public ModelContainer[] bodies;
     public Renderer body;
     public Rigidbody rb;
     public GameObject driver;
@@ -64,13 +69,40 @@ public class Vehicle : MonoBehaviour
         health = Random.Range(healthMin, healthMax);
         gasTank = Random.Range(gasTankMin, gasTankMax);
         Gas = Random.Range(gasTankMin, gasTankMax);
+
+        int thisModel = Random.Range(0, 3);
+        for (int i = 0; i < bodies.Length; i++)
+        {
+            if (i == thisModel)
+            {
+                body = bodies[i].thisModel;
+                bodies[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                bodies[i].gameObject.SetActive(false);
+            }
+        }
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
+    }
+    
+    
+    public void takeFireDamage(float dps, bool onFire)
+    {
+        fire.SetActive(onFire);
+        if (onFire)
+        {
+            health -= dps * Time.deltaTime;
+        }
     }
     void Simulate()
     {
+            onFire = (health<healthMax/9 && !hasExploded);
+            takeFireDamage(17, onFire);
+        
 
-        //this is what actually moves the vehicle
         particleSystem.emissionRate = Mathf.Pow(CurrentMoveSpeed, 2);
+        //this is what actually moves the vehicle
         rb.velocity = transform.forward * CurrentMoveSpeed;
         rb.angularVelocity = new Vector3(0, 0, 0);
         if (!driving)
@@ -88,9 +120,10 @@ public class Vehicle : MonoBehaviour
             //vCam.transform.eulerAngles = new Vector3(vCam.transform.eulerAngles.x, transform.eulerAngles.y, vCam.transform.eulerAngles.z);   
         }
         
-        if (health <= 0)
+        if (health <= 0 && !hasExploded)
         {
             explosion.Play();
+            hasExploded = true;
         }
     }
     void LoseMomentum()

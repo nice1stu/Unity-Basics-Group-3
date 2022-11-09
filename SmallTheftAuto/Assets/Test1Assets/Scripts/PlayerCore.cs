@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerCore : MonoBehaviour
 {
-    public GameObject player;
+    /*public GameObject player;
 
     public int moneyCollected;
 
@@ -25,5 +25,5 @@ public class PlayerCore : MonoBehaviour
 
             player.transform.position = playerPosition;
         }
-    }
+    }*/
 }
