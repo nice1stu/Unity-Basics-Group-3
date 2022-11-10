@@ -34918,7 +34918,7 @@ GameObject:
   - component: {fileID: 8768188417660067592}
   - component: {fileID: 2794259687632498843}
   - component: {fileID: 6420963500146646397}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35002,7 +35002,7 @@ MonoBehaviour:
   driving: 0
   braking: 0
   patrolPoints: []
-  currentPatrolPoints: {fileID: 0}
+  currentPatrolPoint: {fileID: 0}
   currentPatrolPointIndex: 0
   targetAngle: 0
 --- !u!54 &2794259687632498843
