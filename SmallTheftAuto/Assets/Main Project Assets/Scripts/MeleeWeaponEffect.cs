@@ -7,6 +7,9 @@ public class MeleeWeaponEffect : MonoBehaviour
 {
     public int damage = 25;
     public float cooldownDuration = 0.3f;
+    public float hitRadius = 1;
+    public LayerMask hitLayer;
+    
     public ParticleSystem hitParticle;
     private bool onCooldown;
     private Collider hitCol;
@@ -30,20 +33,17 @@ public class MeleeWeaponEffect : MonoBehaviour
 
     void HitEffect()
     {
-        hitCol.enabled = true;
-        hitParticle.Play();
-        StartCoroutine(StartCooldown());
-        hitCol.enabled = false;
-    }
-    
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.TryGetComponent(out IDamageable damageable))
+        Physics.SphereCast(transform.position, hitRadius, Vector3.forward, out RaycastHit hit, 1, hitLayer);
+        if (hit.collider.gameObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage(damage);
-            hitCol.enabled = false;
         }
+        
+        hitParticle.Play();
+        StartCoroutine(StartCooldown());
     }
+    
+    
     
     public IEnumerator StartCooldown()
     {
