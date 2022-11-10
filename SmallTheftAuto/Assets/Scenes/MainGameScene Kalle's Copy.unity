@@ -371,6 +371,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 662560014744864991, guid: 8f7084fece9792f4a92d16f6fa1767bd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8768188417660067593, guid: 8f7084fece9792f4a92d16f6fa1767bd, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3680,7 +3684,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 991890303}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &427935921
 SpriteRenderer:
@@ -7365,9 +7369,17 @@ PrefabInstance:
       propertyPath: inCar
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 89028578925221876, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2331639932768438347, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2331639932768438347, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2331639932768438388, guid: c9986023c014ceb4b9c6e4bb6aeecc8f, type: 3}
       propertyPath: m_UseGravity

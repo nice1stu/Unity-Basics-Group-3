@@ -12,14 +12,12 @@ public class MeleeWeaponEffect : MonoBehaviour
     
     public ParticleSystem hitParticle;
     private bool onCooldown;
-    private Collider hitCol;
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
-        hitCol = GetComponent<Collider>();
-        hitCol.enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -33,12 +31,18 @@ public class MeleeWeaponEffect : MonoBehaviour
 
     void HitEffect()
     {
-        Physics.SphereCast(transform.position, hitRadius, Vector3.forward, out RaycastHit hit, 1, hitLayer);
-        if (hit.collider.gameObject.TryGetComponent(out IDamageable damageable))
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, hitRadius, Vector3.forward, 1.5f, hitLayer);
+        for (var i = 0; i < hits.Length; i++)
         {
-            damageable.TakeDamage(damage);
+            if (hits[i].collider.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(damage);
+                Debug.Log("Hit");
+            }
         }
-        
+
+
+        Debug.Log("Tried Hit");
         hitParticle.Play();
         StartCoroutine(StartCooldown());
     }

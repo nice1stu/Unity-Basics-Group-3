@@ -8,7 +8,8 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
 {
     public bool patrolling;
     bool onFire;
-    private bool hasExploded = false;
+    public bool hasExploded = false;
+    private bool hasExpired = false;
     public GameObject fire;
     
     public float moveSpeed;
@@ -90,6 +91,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
             }
         }
         body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        StartCoroutine(CrashCheck());
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     
@@ -104,7 +106,8 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     }
     void Simulate()
     {
-            onFire = (health<healthMax/9 && !hasExploded);
+        
+            onFire = (health<healthMax/9 && !hasExpired);
             takeFireDamage(17, onFire);
         
 
@@ -125,9 +128,57 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
         
         if (health <= 0 && !hasExploded)
         {
-            explosion.Play();
-            hasExploded = true;
+            ExplosionBangPangKaboomSlam();
         }
+    }
+
+    public float explosionRadius;
+    public float explosionDistance;
+    public LayerMask explosionLayer;
+    
+    void ExplosionBangPangKaboomSlam()
+    {
+        explosion.Play();
+        patrolling = false;
+        ExitCar();
+        hasExploded = true;
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, explosionRadius, Vector3.forward, explosionDistance, explosionLayer);
+        for (var i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(999999999);
+                Debug.Log("Bang");
+            }
+        }
+        StartCoroutine(FireExpire());
+    }
+
+    public IEnumerator FireExpire()
+    {
+        yield return new WaitForSeconds(3);
+        hasExpired = true;
+    }
+    bool temporaryCrashImmunity = false;
+    public IEnumerator ImmunityTimer()
+    {
+        temporaryCrashImmunity = true;
+        yield return new WaitForSeconds(2);
+        temporaryCrashImmunity = false;
+    }
+
+    private float previousMagnitude;
+    public IEnumerator CrashCheck()
+    {
+        Debug.Log(rb.velocity.magnitude);
+        if (previousMagnitude > rb.velocity.magnitude *6 && previousMagnitude > 5 && !temporaryCrashImmunity)
+        {
+            TakeDamage((int)previousMagnitude*100);
+        }
+
+        previousMagnitude = rb.velocity.magnitude;
+        yield return new WaitForSeconds(.5f);
+        StartCoroutine(CrashCheck());
     }
     void LoseMomentum()
     {
@@ -243,7 +294,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     }
     void FixedUpdate()
     {
-        if (driving)
+        if (driving && !hasExploded)
         {
             Drive();
         }
@@ -254,9 +305,9 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
         Simulate();
     }
 
-    private void Update()
+    void ExitCar()
     {
-        if (Input.GetKeyDown(KeyCode.F) && driving)
+        if (driver != null)
         {
             driver.SetActive(true);
             driving = false;
@@ -266,6 +317,13 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
             particleSystem.emissionRate = 0;
             cam.targetAngle = 0;
             cam.isDriving = false;
+        }
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && driving)
+        {
+            ExitCar();
         }
     }
 

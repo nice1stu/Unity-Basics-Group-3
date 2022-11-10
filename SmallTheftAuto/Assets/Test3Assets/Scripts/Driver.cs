@@ -22,7 +22,7 @@ public class Driver : MonoBehaviour
     {
         if (EnterCarInput)
         {
-            if (IsWithinCarDistance)
+            if (IsWithinCarDistance && !vehicle.hasExploded)
             {
                 EnterCar();
             }
@@ -65,7 +65,11 @@ public class Driver : MonoBehaviour
         transform.localEulerAngles = Vector3.zero;
         gameObject.SetActive(false);
         vehicle.driving = true;
-        vehicle.patrolling = false;
+        if (vehicle.patrolling)
+        {
+            vehicle.ImmunityTimer();
+            vehicle.patrolling = false;
+        }
         vehicle.CurrentMoveSpeed = 0;
         inCar = true;
         vehicle.driver = gameObject;
