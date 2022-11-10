@@ -4880,7 +4880,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1123973077}
   - component: {fileID: 1123973079}
-  - component: {fileID: 1123973078}
   m_Layer: 6
   m_Name: Unarmed
   m_TagString: Untagged
@@ -4918,20 +4917,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   cooldownDuration: 0.3
+  hitRadius: 1
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 768
   hitParticle: {fileID: 335068006}
---- !u!135 &1123973078
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123973076}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2331639932768438347
 GameObject:
   m_ObjectHideFlags: 0
@@ -5016,8 +5006,8 @@ MonoBehaviour:
   dosh: {fileID: 0}
   GreyDeathScreen: {fileID: 0}
   Wasted: {fileID: 0}
-  destination: {fileID: 0}
   Money: {fileID: 0}
+  healthUI: {fileID: 0}
 --- !u!114 &2045658631
 MonoBehaviour:
   m_ObjectHideFlags: 0
