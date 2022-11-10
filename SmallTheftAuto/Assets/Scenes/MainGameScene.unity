@@ -11536,18 +11536,6 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 80
       objectReference: {fileID: 0}
-    - target: {fileID: 2889690079622243137, guid: 8f7084fece9792f4a92d16f6fa1767bd, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2896913889295309539, guid: 8f7084fece9792f4a92d16f6fa1767bd, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8034132445749689591, guid: 8f7084fece9792f4a92d16f6fa1767bd, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8768188417660067592, guid: 8f7084fece9792f4a92d16f6fa1767bd, type: 3}
       propertyPath: patrolling
       value: 1
