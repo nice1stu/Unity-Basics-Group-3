@@ -39,6 +39,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable
     public void Heal(int healAmount)
     {
         Mathf.Clamp(hp.value += healAmount, 0, 100);
+        if (hp.value > 100)
+        {
+            hp.value = 100;
+        }
         healthUI.text = $"Health: {hp.value}";
     }
 
