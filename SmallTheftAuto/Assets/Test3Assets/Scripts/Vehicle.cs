@@ -8,7 +8,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
 {
     public bool patrolling;
     bool onFire;
-    private bool hasExploded = false;
+    public bool hasExploded = false;
     private bool hasExpired = false;
     public GameObject fire;
     
@@ -91,6 +91,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
             }
         }
         body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        StartCoroutine(CrashCheck());
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     
@@ -139,6 +140,27 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     {
         yield return new WaitForSeconds(3);
         hasExpired = true;
+    }
+    bool temporaryCrashImmunity = false;
+    public IEnumerator ImmunityTimer()
+    {
+        temporaryCrashImmunity = true;
+        yield return new WaitForSeconds(2);
+        temporaryCrashImmunity = false;
+    }
+
+    private float previousMagnitude;
+    public IEnumerator CrashCheck()
+    {
+        Debug.Log(rb.velocity.magnitude);
+        if (previousMagnitude > rb.velocity.magnitude *6 && previousMagnitude > 5 && !temporaryCrashImmunity)
+        {
+            TakeDamage((int)previousMagnitude*100);
+        }
+
+        previousMagnitude = rb.velocity.magnitude;
+        yield return new WaitForSeconds(.5f);
+        StartCoroutine(CrashCheck());
     }
     void LoseMomentum()
     {
@@ -267,14 +289,17 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
 
     void ExitCar()
     {
-        driver.SetActive(true);
-        driving = false;
-        driver.GetComponent<Driver>().inCar = true;
-        //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
-        cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
-        particleSystem.emissionRate = 0;
-        cam.targetAngle = 0;
-        cam.isDriving = false;
+        if (driver != null)
+        {
+            driver.SetActive(true);
+            driving = false;
+            driver.GetComponent<Driver>().inCar = true;
+            //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
+            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
+            particleSystem.emissionRate = 0;
+            cam.targetAngle = 0;
+            cam.isDriving = false;
+        }
     }
     private void Update()
     {
