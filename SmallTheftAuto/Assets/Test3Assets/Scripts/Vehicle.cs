@@ -64,7 +64,6 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     public bool braking;
     private void Start()
     {
-        body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
         handeling = Random.Range(handelingMin, handelingMax);
         acceleration = Random.Range(accelerationMin, accelerationMax);
@@ -90,6 +89,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
                 bodies[i].gameObject.SetActive(false);
             }
         }
+        body.material.color = Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         //transform.localScale = new Vector3(Random.Range(1f, 2f), Random.Range(1f, 2f), Random.Range(1f, 2f));
     }
     
