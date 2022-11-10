@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuUI;
     public GameObject player;
     public NumericValue moneyCollected;
-    public int playerHealth;
+    public NumericValue hp;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -42,14 +42,14 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadGame()
     {
-        Debug.Log("Load Game...");
+        //Debug.Log("Load Game...");
         float playerPositionX = PlayerPrefs.GetFloat("playerPositionX");
         float playerPositionY = PlayerPrefs.GetFloat("playerPositionY");
         float playerPositionZ = PlayerPrefs.GetFloat("playerPositionZ");
         Vector3 playerPosition = new Vector3(playerPositionX, playerPositionY, playerPositionZ);
         moneyCollected.value = PlayerPrefs.GetInt("moneyCollected");
-        playerHealth = PlayerPrefs.GetInt("playerHealth");
-        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + playerHealth + "moneyCollected" + moneyCollected.value);
+        hp.value = PlayerPrefs.GetInt("playerHealth");
+        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + hp.value + "moneyCollected" + moneyCollected.value);
 
         player.transform.position = playerPosition;
     }
@@ -57,7 +57,7 @@ public class PauseMenu : MonoBehaviour
     public void RestartGame()
     {
         Debug.Log("Restart Game");
-        SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("StartMenu");
     }
 
     public void QuitGame()

@@ -12,6 +12,8 @@ public class StartPage : MonoBehaviour
     public void LoadGame()
     {
         Debug.Log("Load Game");
+        SceneManager.LoadScene("MainGameScene");
+        FindObjectOfType<PauseMenu>().LoadGame();
     }
     public void ExitGame()
     {

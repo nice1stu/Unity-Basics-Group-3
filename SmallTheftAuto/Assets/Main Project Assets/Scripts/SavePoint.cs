@@ -17,6 +17,7 @@ public class SavePoint : MonoBehaviour
 
         void Save()
         {
+            hp = FindObjectOfType<PlayerStatus>().hp;
             Vector3 playerPosition = player.transform.position;
             PlayerPrefs.SetFloat("playerPositionX", playerPosition.x);
             PlayerPrefs.SetFloat("playerPositionY", playerPosition.y);
@@ -24,7 +25,6 @@ public class SavePoint : MonoBehaviour
             PlayerPrefs.SetInt("moneyCollected", moneyCollected.value);
             PlayerPrefs.SetInt("playerHealth", hp.value);
             PlayerPrefs.Save();
-            Debug.Log("playerPosition " + playerPosition + ", PlayerHealth " + hp.value + ", moneyCollected " +
-                      moneyCollected.value); 
+            Debug.Log("playerPosition " + playerPosition + ", PlayerHealth " + hp.value + ", moneyCollected " + moneyCollected.value); 
         }
 }
