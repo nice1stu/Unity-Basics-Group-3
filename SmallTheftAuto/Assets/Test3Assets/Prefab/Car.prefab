@@ -34917,7 +34917,7 @@ GameObject:
   - component: {fileID: 8768188417660067593}
   - component: {fileID: 8768188417660067592}
   - component: {fileID: 2794259687632498843}
-  - component: {fileID: 6420963500146646397}
+  - component: {fileID: 6633158492136493961}
   m_Layer: 8
   m_Name: Car
   m_TagString: Untagged
@@ -34987,8 +34987,8 @@ MonoBehaviour:
   cam: {fileID: 0}
   vCam: {fileID: 0}
   explosion: {fileID: 8570310885707809868}
-  moveSpeedMin: 14
-  moveSpeedMax: 45
+  moveSpeedMin: 20
+  moveSpeedMax: 35
   handelingMin: 80
   handelingMax: 200
   driftingMin: 1.8
@@ -35021,19 +35021,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!65 &6420963500146646397
-BoxCollider:
+--- !u!136 &6633158492136493961
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8768188417660067595}
-  m_Material: {fileID: 13400000, guid: 4ce1cb6478b25574b891c4554bf8d809, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.4284964, y: 1.7305835, z: 3.9171565}
-  m_Center: {x: -0.020185824, y: 0.88224703, z: -0.29667318}
+  m_Radius: 0.998364
+  m_Height: 4.3724117
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.0139687, z: -0.31999993}
 --- !u!1 &8768188417713625405
 GameObject:
   m_ObjectHideFlags: 0

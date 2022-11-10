@@ -16,15 +16,16 @@ public class Pedestrian : MonoBehaviour, IDamageable
         hp = maxHP;
     }
     public GameObject[] patrolPoints;
-    public GameObject currentPatrolPoints;
+    public GameObject currentPatrolPoint;
     public int currentPatrolPointIndex;
     
     public int CurrentMoveSpeed;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 && other.gameObject == currentPatrolPoint)
         {
-            if (currentPatrolPointIndex>=patrolPoints.Length-1)
+            if (currentPatrolPointIndex >= patrolPoints.Length - 1)
             {
                 currentPatrolPointIndex = 0;
             }
@@ -32,13 +33,14 @@ public class Pedestrian : MonoBehaviour, IDamageable
             {
                 currentPatrolPointIndex++;
             }
-            currentPatrolPoints = patrolPoints[currentPatrolPointIndex];
+
+            currentPatrolPoint = patrolPoints[currentPatrolPointIndex];
         }
     }
-    
+
     void Patrol()
     {
-        transform.LookAt(currentPatrolPoints.transform, Vector3.up);
+        transform.LookAt(currentPatrolPoint.transform, Vector3.up);
         rb.velocity = transform.forward * CurrentMoveSpeed;
     }
     void Update()
