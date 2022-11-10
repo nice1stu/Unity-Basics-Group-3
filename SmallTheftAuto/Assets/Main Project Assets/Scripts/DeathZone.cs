@@ -14,7 +14,7 @@ public class DeathZone : MonoBehaviour
     public GameObject Player;
     public Transform destination;
     public TextMeshProUGUI Money;
-    public int playerHealth;
+    public NumericValue hp;
 
 
     private void OnTriggerEnter(Collider col)
@@ -32,6 +32,7 @@ public class DeathZone : MonoBehaviour
 
     public void respawn()
     {
+        hp = FindObjectOfType<PlayerStatus>().hp;
         Time.timeScale = 1;
         Money.text = "Money: " + dosh.value;
         GreyDeathScreen.SetActive(false);
@@ -43,23 +44,10 @@ public class DeathZone : MonoBehaviour
         float playerPositionZ = PlayerPrefs.GetFloat("playerPositionZ");
         Vector3 playerPosition = new Vector3(playerPositionX, playerPositionY, playerPositionZ);
         dosh.value = PlayerPrefs.GetInt("moneyCollected")/2;
-        playerHealth = PlayerPrefs.GetInt("playerHealth");
-        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + playerHealth + "moneyCollected" + dosh.value);
+        hp.value = PlayerPrefs.GetInt("playerHealth");
+        Debug.Log("playerPosition" + playerPosition + "PlayerHealth" + hp.value + "moneyCollected" + dosh.value);
 
         Player.transform.position = playerPosition;
-        
-    }
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 }
