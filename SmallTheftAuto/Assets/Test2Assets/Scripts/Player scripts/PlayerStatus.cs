@@ -24,7 +24,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         if(healthUI != null)
             healthUI.text = $"Health: {hp.value}";
         burn = GetComponent<Burning>();
-        burn.onFire = true;
+        burn.onFire = false;
     }
 
     // Update is called once per frame

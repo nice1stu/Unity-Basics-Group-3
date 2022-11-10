@@ -128,12 +128,30 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
         
         if (health <= 0 && !hasExploded)
         {
-            explosion.Play();
-            patrolling = false;
-            ExitCar();
-            hasExploded = true;
-            StartCoroutine(FireExpire());
+            ExplosionBangPangKaboomSlam();
         }
+    }
+
+    public float explosionRadius;
+    public float explosionDistance;
+    public LayerMask explosionLayer;
+    
+    void ExplosionBangPangKaboomSlam()
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, explosionRadius, Vector3.forward, explosionDistance, explosionLayer);
+        for (var i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(999999999);
+                Debug.Log("Bang");
+            }
+        }
+        explosion.Play();
+        patrolling = false;
+        ExitCar();
+        hasExploded = true;
+        StartCoroutine(FireExpire());
     }
 
     public IEnumerator FireExpire()

@@ -34964,6 +34964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolling: 0
+  hasExploded: 0
   fire: {fileID: 2554248355335114515}
   moveSpeed: 9
   handeling: 100
@@ -35001,6 +35002,11 @@ MonoBehaviour:
   gasTankMax: 1000
   driving: 0
   braking: 0
+  explosionRadius: 6
+  explosionDistance: 0.1
+  explosionLayer:
+    serializedVersion: 2
+    m_Bits: 769
   patrolPoints: []
   currentPatrolPoint: {fileID: 0}
   currentPatrolPointIndex: 0
