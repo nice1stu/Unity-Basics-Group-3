@@ -62,6 +62,7 @@ public class Pedestrian : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        alive = false;
         patrol = false;
         transform.Rotate(-90,0,0);
     }
