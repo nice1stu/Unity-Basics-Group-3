@@ -9,6 +9,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     public bool patrolling;
     bool onFire;
     private bool hasExploded = false;
+    private bool hasExpired = false;
     public GameObject fire;
     
     public float moveSpeed;
@@ -104,7 +105,8 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     }
     void Simulate()
     {
-            onFire = (health<healthMax/9 && !hasExploded);
+        
+            onFire = (health<healthMax/9 && !hasExpired);
             takeFireDamage(17, onFire);
         
 
@@ -126,8 +128,17 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
         if (health <= 0 && !hasExploded)
         {
             explosion.Play();
+            patrolling = false;
+            ExitCar();
             hasExploded = true;
+            StartCoroutine(FireExpire());
         }
+    }
+
+    public IEnumerator FireExpire()
+    {
+        yield return new WaitForSeconds(3);
+        hasExpired = true;
     }
     void LoseMomentum()
     {
@@ -243,7 +254,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     }
     void FixedUpdate()
     {
-        if (driving)
+        if (driving && !hasExploded)
         {
             Drive();
         }
@@ -254,18 +265,22 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
         Simulate();
     }
 
+    void ExitCar()
+    {
+        driver.SetActive(true);
+        driving = false;
+        driver.GetComponent<Driver>().inCar = true;
+        //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
+        cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
+        particleSystem.emissionRate = 0;
+        cam.targetAngle = 0;
+        cam.isDriving = false;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && driving)
         {
-            driver.SetActive(true);
-            driving = false;
-            driver.GetComponent<Driver>().inCar = true;
-            //cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 13, 20), cam.offset.z);
-            cam.offset = new Vector3(cam.offset.x, Mathf.Lerp(18, 10, 20), Mathf.Lerp(-18, 0, 20));
-            particleSystem.emissionRate = 0;
-            cam.targetAngle = 0;
-            cam.isDriving = false;
+            ExitCar();
         }
     }
 
