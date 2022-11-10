@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 
@@ -7,29 +9,45 @@ public class PlayerStatus : MonoBehaviour, IDamageable
 {
     public NumericValue hp;
     public NumericValue dosh;
-    
+
     public GameObject GreyDeathScreen;
     public GameObject Wasted;
     public TextMeshProUGUI Money;
     public TextMeshProUGUI healthUI;
 
+    private Burning burn;
+
     // Start is called before the first frame update
     void Start()
     {
         hp.value = 100;
-        healthUI.text = $"Health: {hp.value}";
+        if(healthUI != null)
+            healthUI.text = $"Health: {hp.value}";
+        burn = GetComponent<Burning>();
+        burn.onFire = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthUI.text = $"Health: {hp.value}";
+        if(healthUI != null)
+            healthUI.text = $"Health: {hp.value}";
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.layer == 6 && !burn.onFire)
+        {
+            burn.onFire = true;
+        }
     }
 
     public void TakeDamage(int damage)
     {
         Mathf.Clamp(hp.value -= damage, 0, 100);
-        healthUI.text = $"Health: {hp.value}";
+        if (healthUI != null)
+            healthUI.text = $"Health: {hp.value}";
+        
         if (hp.value <= 0)
         {
             StartCoroutine(Death());
@@ -66,4 +84,5 @@ public class PlayerStatus : MonoBehaviour, IDamageable
 
         transform.position = playerPosition;
     }
+    
 }
