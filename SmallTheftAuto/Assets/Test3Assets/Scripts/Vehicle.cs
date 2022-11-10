@@ -138,6 +138,10 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     
     void ExplosionBangPangKaboomSlam()
     {
+        explosion.Play();
+        patrolling = false;
+        ExitCar();
+        hasExploded = true;
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, explosionRadius, Vector3.forward, explosionDistance, explosionLayer);
         for (var i = 0; i < hits.Length; i++)
         {
@@ -147,10 +151,6 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
                 Debug.Log("Bang");
             }
         }
-        explosion.Play();
-        patrolling = false;
-        ExitCar();
-        hasExploded = true;
         StartCoroutine(FireExpire());
     }
 
