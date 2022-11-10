@@ -72,6 +72,10 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
         health = Random.Range(healthMin, healthMax);
         gasTank = Random.Range(gasTankMin, gasTankMax);
         Gas = Random.Range(gasTankMin, gasTankMax);
+        if (currentPatrolPoint == null && patrolPoints.Length>0)
+        {
+            currentPatrolPoint = patrolPoints[0];
+        }
 
         int thisModel = Random.Range(0, 3);
         for (int i = 0; i < bodies.Length; i++)
@@ -207,15 +211,15 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     }
 
     public GameObject[] patrolPoints;
-    public GameObject currentPatrolPoints;
+    public GameObject currentPatrolPoint;
     public int currentPatrolPointIndex;
 
     private float currentAngle = 0;
     public float targetAngle = 0;
     private float angularVelocity;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 && other.gameObject == currentPatrolPoint)
         {
             if (currentPatrolPointIndex>=patrolPoints.Length-1)
             {
@@ -225,14 +229,14 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
             {
                 currentPatrolPointIndex++;
             }
-            currentPatrolPoints = patrolPoints[currentPatrolPointIndex];
+            currentPatrolPoint = patrolPoints[currentPatrolPointIndex];
         }
     }
 
     void Patrol()
     {
         CurrentMoveSpeed = 14;
-        transform.LookAt(currentPatrolPoints.transform, Vector3.up);
+        transform.LookAt(currentPatrolPoint.transform, Vector3.up);
         rb.velocity = transform.forward * CurrentMoveSpeed;
         //currentAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref angularVelocity, 0.2f);
         //transform.localEulerAngles = new Vector3(currentAngle,0, 0);
