@@ -171,7 +171,7 @@ public class Vehicle : MonoBehaviour, ImFlammable, IDamageable
     public IEnumerator CrashCheck()
     {
         Debug.Log(rb.velocity.magnitude);
-        if (previousMagnitude > rb.velocity.magnitude *6 && previousMagnitude > 5 && !temporaryCrashImmunity)
+        if (previousMagnitude > rb.velocity.magnitude *24 && previousMagnitude > 5 && !temporaryCrashImmunity)
         {
             TakeDamage((int)previousMagnitude*100);
         }
